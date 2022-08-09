@@ -20,8 +20,6 @@ const schemaBase = yup.object().shape({
     titleSize: yup.number().default(12),
     titleColor: yup.string().default('red'),
     titleAlign: yup.string().default('center'),
-    icon: yup.string().default(''),
-    iconScale: yup.string().default(1),
 });
 
 /**
@@ -50,6 +48,10 @@ const rendererBase = (qrcode, options) => {
         'posType',
         'otherColor',
         'posColor',
+        'title',
+        'titleSize',
+        'titleColor',
+        'titleAlign',
     ].map((k) => options[k]);
 
     const svg = createRenderer({

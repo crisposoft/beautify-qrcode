@@ -1,7 +1,6 @@
 import { drawIcon } from "./drawIcon";
 
 export function createRenderer(renderer) {
-    console.log("test");
     const defaultViewBox = function (qrcode) {
         if (!qrcode) return '0 0 0 0';
 
