@@ -15,6 +15,13 @@ const schemaBase = yup.object().shape({
     otherColor: yup.string().default('#000000'),
     // 定位点点颜色
     posColor: yup.string().default('#000000'),
+
+    title: yup.string().default('xxx'),
+    titleSize: yup.number().default(12),
+    titleColor: yup.string().default('red'),
+    titleAlign: yup.string().default('center'),
+    icon: yup.string().default(''),
+    iconScale: yup.string().default(1),
 });
 
 /**
