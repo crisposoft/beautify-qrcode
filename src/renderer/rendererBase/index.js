@@ -3,35 +3,32 @@ import { createRenderer } from '@/utils/renderer';
 import listPoints from './listPoints';
 
 const schemaBase = yup.object().shape({
-    // 信息点样式 ['矩形', '圆形', '随机']
     type: yup.mixed().oneOf([0, 1, 2]).default(0),
-    // 信息点缩放
     size: yup.number().default(100),
-    // 信息点不透明度
     opacity: yup.number().default(100),
-    // 定位点样式['矩形', '圆形', '行星','圆角矩形']
     posType: yup.mixed().oneOf([0, 1, 2, 3]).default(0),
-    // 信息点颜色
     otherColor: yup.string().default('#000000'),
-    // 定位点点颜色
     posColor: yup.string().default('#000000'),
 
+    // title
     title: yup.string().default(''),
-    titleSize: yup.number().default(12),
-    titleColor: yup.string().default('red'),
-    titleAlign: yup.string().default('center'),
+    titleSize: yup.number().default(5),
+    titleFontFamily: yup.string().default('Belgium, Arial, Helvetica, sans-serif'),
+    titleBorderWidth: yup.number().default(0.1),
+    titleBorderRadius: yup.number().default(0),
+    titleMargin: yup.number().default(2)
 });
 
 /**
  *
  * @param {Object} qrcode
  * @param {Object} options
- * @param {Number} [options.type]  信息点样式 0=>矩形 1=>圆形,2=>随机
- * @param {Number} [options.size] 信息点缩放
- * @param {String} [options.opacity]  信息点不透明度
- * @param {String} [options.posType] 定位点样式 0=>矩形 1=>圆形 2=>行星 3=>圆角矩形
- * @param {String} [options.otherColor] 信息点颜色
- * @param {String} [options.posColor] 定位点点颜色
+ * @param {Number} [options.type]
+ * @param {Number} [options.size]
+ * @param {String} [options.opacity]
+ * @param {String} [options.posType]
+ * @param {String} [options.otherColor]
+ * @param {String} [options.posColor]
  */
 const rendererBase = (qrcode, options) => {
     try {
@@ -50,8 +47,10 @@ const rendererBase = (qrcode, options) => {
         'posColor',
         'title',
         'titleSize',
-        'titleColor',
-        'titleAlign',
+        'titleFontFamily',
+        'titleBorderWidth',
+        'titleBorderRadius',
+        'titleMargin',
     ].map((k) => options[k]);
 
     const svg = createRenderer({
@@ -64,12 +63,12 @@ const rendererBase = (qrcode, options) => {
  *
  * @param {Object} qrcode
  * @param {Object} options
- * @param {Number} [options.type]  信息点样式 0=>矩形 1=>圆形,2=>随机
- * @param {Number} [options.size] 信息点缩放
- * @param {String} [options.opacity]  信息点不透明度
- * @param {String} [options.posType] 定位点样式 0=>矩形 1=>圆形 2=>行星
- * @param {String} [options.otherColor] 信息点颜色
- * @param {String} [options.posColor] 定位点点颜色
+ * @param {Number} [options.type]
+ * @param {Number} [options.size]
+ * @param {String} [options.opacity]
+ * @param {String} [options.posType]
+ * @param {String} [options.otherColor]
+ * @param {String} [options.posColor]
  */
 export const rendererRect = (qrcode, options = {}) => {
     options = {
@@ -87,12 +86,12 @@ export const rendererRect = (qrcode, options = {}) => {
  *
  * @param {Object} qrcode
  * @param {Object} options
- * @param {Number} [options.type]  信息点样式 0=>矩形 1=>圆形,2=>随机
- * @param {Number} [options.size] 信息点缩放
- * @param {String} [options.opacity]  信息点不透明度
- * @param {String} [options.posType] 定位点样式 0=>矩形 1=>圆形 2=>行星
- * @param {String} [options.otherColor] 信息点颜色
- * @param {String} [options.posColor] 定位点点颜色
+ * @param {Number} [options.type]
+ * @param {Number} [options.size]
+ * @param {String} [options.opacity]
+ * @param {String} [options.posType]
+ * @param {String} [options.otherColor]
+ * @param {String} [options.posColor]
  */
 export const rendererRound = (qrcode, options = {}) => {
     options = {
@@ -110,12 +109,12 @@ export const rendererRound = (qrcode, options = {}) => {
  *
  * @param {Object} qrcode
  * @param {Object} options
- * @param {Number} [options.type]  信息点样式 0=>矩形 1=>圆形,2=>随机
- * @param {Number} [options.size] 信息点缩放
- * @param {String} [options.opacity]  信息点不透明度
- * @param {String} [options.posType] 定位点样式 0=>矩形 1=>圆形 2=>行星
- * @param {String} [options.otherColor] 信息点颜色
- * @param {String} [options.posColor] 定位点点颜色
+ * @param {Number} [options.type]
+ * @param {Number} [options.size]
+ * @param {String} [options.opacity]
+ * @param {String} [options.posType]
+ * @param {String} [options.otherColor]
+ * @param {String} [options.posColor]
  */
 export const rendererRandRound = (qrcode, options = {}) => {
     options = {

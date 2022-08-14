@@ -71,7 +71,7 @@ const RendererResImage = ({ qrcode, params }) => {
             className="Qr-item-svg"
             width="${width}"
             height="${height}"
-            viewBox="${getViewBox(qrcode)}"
+            viewBox="${getViewBox(qrcode, params)}"
             fill="white"
             xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink"

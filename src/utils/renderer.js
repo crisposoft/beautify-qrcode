@@ -1,16 +1,48 @@
-import { drawIcon } from "./drawIcon";
+import { drawIcon } from './drawIcon';
 
 export function createRenderer(renderer) {
-    const defaultViewBox = function (qrcode) {
-        if (!qrcode) return '0 0 0 0';
+    const defaultViewBox = function (
+        qrcode,
+        [
+            type,
+            size,
+            opacity,
+            posType,
+            otherColor,
+            posColor,
+            title,
+            titleSize,
+            titleFontFamily,
+            titleBorderWidth,
+            titleBorderRadius,
+            titleMargin,
+        ]
+    ) {
+        if (!qrcode) {
+            return '0 0 0 0';
+        }
 
         const nCount = qrcode.getModuleCount();
-        // 不留间隔
-        return qrcode.$options.isSpace
-            ? `${-nCount / 5} ${-nCount / 5} ${nCount + (nCount / 5) * 2} ${
-                  nCount + (nCount / 5) * 2
-              }`
-            : `${0} ${0} ${nCount} ${nCount}`;
+
+        let minX = 0;
+        let minY = 0;
+
+        let width = nCount;
+        let height = nCount;
+
+        if (title) {
+            minY -= ((titleSize || 12) + 3 * titleMargin);
+            height += ((titleSize || 12) + 3 * titleMargin);
+        }
+
+        if (qrcode.$options.isSpace) {
+            minX -= nCount / 5;
+            minY -= nCount / 5;
+            width += nCount + (nCount / 5) * 2;
+            height += nCount + (nCount / 5) * 2;
+        }
+
+        return `${minX} ${minY} ${width} ${height}`;
     };
 
     renderer = {
@@ -34,7 +66,8 @@ export function createRenderer(renderer) {
         const { width, height } = qrcode.$options;
         return `
             <svg width="${width}" height="${height}" viewBox="${renderer.getViewBox(
-            qrcode
+            qrcode,
+            params
         )}" fill="white"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 ${renderer.drawIcon(qrcode, params).join('')}

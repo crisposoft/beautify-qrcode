@@ -1,49 +1,42 @@
-export function drawIcon(qrcode, [type,
-                        size,
-                        opacity,
-                        posType,
-                        otherColor,
-                        posColor,
-                        title,
-                        titleSize,
-                        titleColor,
-                        titleAlign]) {    
-
-    const icon = null;
-    let iconScale = 0.33;
-
-    if (!qrcode) return []
-    if (!title && !icon){ 
+export function drawIcon(
+    qrcode,
+    [
+        type,
+        size,
+        opacity,
+        posType,
+        otherColor,
+        posColor,
+        title,
+        titleSize,
+        titleFontFamily,
+        titleBorderWidth,
+        titleBorderRadius,
+        titleMargin,
+    ]
+) {
+    if (!qrcode || !title) {
         return [];
     }
 
-    const nCount = qrcode.getModuleCount();
-    const { fontSize, color, verticalAlign, ...titleStyle } = /* styles.title || */ {};
-    const titleVerticalAlign = titleAlign || verticalAlign || (icon ? "bottom" : "middle");
-
-    iconScale = iconScale > .33 ? .33 : iconScale;
-    const iconSize = Number(nCount * iconScale);
-    const iconXY = (nCount - iconSize) / 2;
-
     const pointList = [];
-    if (icon || titleVerticalAlign === "middle") {
-        pointList.push(`<rect key="1" width="${iconSize}" height="${iconSize}" rx="2" ry="2" fill="#FFFFFF" x="${iconXY}" y="${iconXY}" />`);
-    }
-
-    if (icon) {
-        pointList.push(`<image key="2" xlinkHref="${icon}" width="${iconSize - 2}" x="${iconXY + 1}" y="${iconXY + 1}" />`);
-    }
-
     if (title) {
-        const svgWidth = 300;
-        const titleFontSize = Number(nCount + nCount / 5 * 2) * (titleSize || fontSize || 12) / svgWidth;
-        const titleFontColor = titleColor || color || "#000000";
+        const nCount = qrcode.getModuleCount();
 
-        const fontY = titleVerticalAlign === "middle"
-            ? (icon ? (iconXY + iconSize) : (nCount / 2 + titleFontSize * .5))
-            : Number(nCount + nCount / 5) - titleFontSize * .5;
+        pointList.push(
+            `<rect width="${nCount - titleBorderWidth}" height="${
+                titleSize + 2 * titleMargin - titleBorderWidth
+            }" key="-2" x="${titleBorderWidth / 2}" y="${
+                -(titleSize || 12) - 3 * titleMargin + titleBorderWidth / 2
+            }" stroke="#000000" rx="${titleBorderRadius || 'auto'}" stroke-width="${titleBorderWidth}"/>`
+        );
 
-        pointList.push(`<text key="3" x="${nCount / 2}" y="${fontY}" fill="${titleFontColor}" textAnchor="middle">${title}</text>`)
+        const fontX = nCount / 2;
+        const fontY = -2 * titleMargin;
+        
+        pointList.push(
+            `<text key="-1" x="${fontX}" y="${fontY}" fill="#000000" text-anchor="middle" font-size="${titleSize}" font-family="${titleFontFamily}">${title}</text>`
+        );
     }
 
     return pointList;
