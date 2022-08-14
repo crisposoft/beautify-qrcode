@@ -1,4 +1,4 @@
-import { drawIcon } from './drawIcon';
+import { drawTitle } from 'beautify-qrcode/src/utils/drawTitle';
 
 export function createRenderer(renderer) {
     const defaultViewBox = function (
@@ -51,7 +51,7 @@ export function createRenderer(renderer) {
             listPoints: (qrcode, params) => {
                 return [];
             },
-            drawIcon: drawIcon,
+            drawTitle: drawTitle,
             getParamInfo: () => {
                 return [];
             },
@@ -70,7 +70,7 @@ export function createRenderer(renderer) {
             params
         )}" fill="white"
                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                ${renderer.drawIcon(qrcode, params).join('')}
+                ${renderer.drawTitle(qrcode, params).join('')}
                 ${renderer.listPoints(qrcode, params).join('')}
             </svg>
         `;

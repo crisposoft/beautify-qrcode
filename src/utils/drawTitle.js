@@ -1,4 +1,4 @@
-export function drawIcon(
+export function drawTitle(
     qrcode,
     [
         type,
