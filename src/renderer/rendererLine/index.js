@@ -9,28 +9,47 @@ const schemaLine = yup.object().shape({
     posType: yup.mixed().oneOf([0, 1, 2, 3]).default(3),
     otherColor: yup.string().default('#000000'),
     posColor: yup.string().default('#000000'),
+
+    // title
+    title: yup.string().default(''),
+    titleSize: yup.number().default(5),
+    titleFontFamily: yup
+        .string()
+        .default('Belgium, Arial, Helvetica, sans-serif'),
+    titleBorderWidth: yup.number().default(0.1),
+    titleBorderRadius: yup.number().default(0),
+    titleMargin: yup.number().default(2),
 });
+
 const schemaLine2 = yup.object().shape({
     type: yup.mixed().oneOf([0, 1, 2, 3, 4, 5, 6]).default(6),
     size: yup.number().default(50),
     opacity: yup.number().default(100),
     posType: yup.mixed().oneOf([0, 1, 2, 3]).default(0),
-
     otherColor: yup.string().default('#000000'),
-
     posColor: yup.string().default('#000000'),
+
+    // title
+    title: yup.string().default(''),
+    titleSize: yup.number().default(5),
+    titleFontFamily: yup
+        .string()
+        .default('Belgium, Arial, Helvetica, sans-serif'),
+    titleBorderWidth: yup.number().default(0.1),
+    titleBorderRadius: yup.number().default(0),
+    titleMargin: yup.number().default(2),
 });
 
 /**
  *
  * @param {Object} qrcode
  * @param {Object} options
- * @param {String} [options.type]  连线方向 0=>左右 1=>上下 2=>纵横 3=>回环 4=>左上—右下 5=>右上—左下 6=>交叉"
- * @param {String} [options.size] 连线粗细
- * @param {String} [options.opacity] 连线不透明度
- * @param {String} [options.posType] 定位点样式  0=>矩形 1=>圆形 2=>行星 3=>圆角矩形
- * @param {String} [options.otherColor] 连线颜色
- * @param {String} [options.posColor] 定位点颜色
+ * @param {String} [options.type]
+ * @param {String} [options.size]
+ * @param {String} [options.opacity]
+ * @param {String} [options.posType]
+ * @param {String} [options.otherColor]
+ * @param {String} [options.posColor]
  */
 export const rendererLine = (qrcode, options) => {
     try {
@@ -47,6 +66,12 @@ export const rendererLine = (qrcode, options) => {
         'posType',
         'otherColor',
         'posColor',
+        'title',
+        'titleSize',
+        'titleFontFamily',
+        'titleBorderWidth',
+        'titleBorderRadius',
+        'titleMargin',
     ].map((k) => options[k]);
 
     const svg = createRenderer({
@@ -60,12 +85,12 @@ export const rendererLine = (qrcode, options) => {
  *
  * @param {Object} qrcode
  * @param {Object} options
- * @param {String} [options.type]  连线方向 0=>左右 1=>上下 2=>纵横 3=>回环 4=>左上—右下 5=>右上—左下 7=>交叉"
- * @param {String} [options.size] 连线粗细
- * @param {String} [options.opacity] 连线不透明度
- * @param {String} [options.posType] 定位点样式  0=>矩形 1=>圆形 2=>行星 3=>圆角矩形
- * @param {String} [options.otherColor] 连线颜色
- * @param {String} [options.posColor] 定位点颜色
+ * @param {String} [options.type] 
+ * @param {String} [options.size]
+ * @param {String} [options.opacity]
+ * @param {String} [options.posType]
+ * @param {String} [options.otherColor]
+ * @param {String} [options.posColor]
  */
 export const rendererLine2 = (qrcode, options) => {
     try {
@@ -82,6 +107,12 @@ export const rendererLine2 = (qrcode, options) => {
         'posType',
         'otherColor',
         'posColor',
+        'title',
+        'titleSize',
+        'titleFontFamily',
+        'titleBorderWidth',
+        'titleBorderRadius',
+        'titleMargin',
     ].map((k) => options[k]);
 
     const svg = createRenderer({

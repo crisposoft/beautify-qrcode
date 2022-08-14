@@ -13,10 +13,12 @@ const schemaBase = yup.object().shape({
     // title
     title: yup.string().default(''),
     titleSize: yup.number().default(5),
-    titleFontFamily: yup.string().default('Belgium, Arial, Helvetica, sans-serif'),
+    titleFontFamily: yup
+        .string()
+        .default('Belgium, Arial, Helvetica, sans-serif'),
     titleBorderWidth: yup.number().default(0.1),
     titleBorderRadius: yup.number().default(0),
-    titleMargin: yup.number().default(2)
+    titleMargin: yup.number().default(2),
 });
 
 /**
